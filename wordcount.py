@@ -74,7 +74,7 @@ class WordCount:
         """This function returns the current total word count. """
         return self._word_counter
 
-    def word_count_specific(self, word):
+    def word_count(self, word):
         """This function returns the current count for a given word."""
         clean_word = self._word_cleaner(word)
         return self._words_seen[clean_word]
