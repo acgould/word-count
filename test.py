@@ -48,6 +48,7 @@ def test_add(list_of_words):
         assert wc._word_counter == manual_count
 
 def test_count_file(filename):
+    """ This test only works for my numeric-based test files. """
     wc = WordCount()
     wc.count_file(filename)
     assert wc._word_counter == 10
@@ -70,16 +71,30 @@ def test_count_mult_files(list_of_filenames):
         assert wc._words_seen['four'] == 4*mult
         mult += 1
 
-    
+def test_word_count(list_of_words):
+    wc = WordCount()
+    manual_count = 0
+    for word in list_of_words:
+        wc._add_to_count(word)
+        manual_count += 1
+        assert wc.word_count_total() == manual_count
+        assert wc.word_count_total() == wc._word_counter
+
+def list_of_strings(length):
+    list = range(length)
+    for i in range(length):
+        list[i] = str(i)
+    return list
 
 
 def run_tests():
     file_to_words = False
-    clean_words = True
-    reset = True
-    adding_words = True
-    count_file = True
+    clean_words = False
+    reset = False
+    adding_words = False
+    count_file = False
     count_mult_files = True
+    return_count = True
 
     if file_to_words: 
         print "Testing ability to open file and return words: "
@@ -128,5 +143,13 @@ def run_tests():
         test_count_mult_files(all_files[:3])
         test_count_mult_files(all_files[:4])
         test_count_mult_files(all_files)
+
+    if return_count:
+        print "Testing proper return of total word count."
+        test_word_count([])
+        test_word_count(list_of_strings(100))
+        test_word_count(list_of_strings(1000))
+        test_word_count(list_of_strings(1000) + list_of_strings(1000))
+        
 
 run_tests()
