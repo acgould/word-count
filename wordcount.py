@@ -79,12 +79,12 @@ class WordCount:
         clean_word = self._word_cleaner(word)
         return self._words_seen[clean_word]
 
-    def words_list_alphabetical(self):
+    def words_alphabetical(self):
         """
         This function returns a list of all the words seen, sorted 
         alphabetically.
         """
-        return
+        return sorted(self._words_seen.keys())
 
     def words_list_rank(self):
         """

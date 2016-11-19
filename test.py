@@ -100,7 +100,7 @@ def test_count_file(filename):
     assert wc._words_seen['four'] == 4
 
 def all_test_count_file():
-    "Testing addition of files to increase counts."
+    print "Testing addition of files to increase counts."
     test_count_file('words.txt')
     test_count_file('wordswithcaps.txt')
     test_count_file('wordswithpunct.txt')
@@ -145,6 +145,20 @@ def all_test_word_count_total():
     test_word_count_total(list_of_strings(1000))
     test_word_count_total(list_of_strings(1000) + list_of_strings(1000))
 
+def test_alpha_words(filename):
+    wc = WordCount()
+    wc.count_file(filename)
+    return wc.words_alphabetical()
+
+
+def all_test_alpha_words():
+    print "Testing proper return of all words alphabetically."
+    alpha_list = ['four', 'one', 'three', 'two']
+    assert test_alpha_words('blank.txt') == []
+    assert test_alpha_words('words.txt') == alpha_list
+    assert test_alpha_words('wordswithcaps.txt') == alpha_list
+    assert test_alpha_words('wordswithpunct.txt') == alpha_list
+    assert test_alpha_words('wordswithnewlines.txt') == alpha_list
 
 def run_tests():
     # Test file to list of words
@@ -167,6 +181,9 @@ def run_tests():
 
     # Test that total word count is returned correctly
     all_test_word_count_total()
+
+    # Test that words are returned alphabetically in a list
+    all_test_alpha_words()
 
 
 
