@@ -7,10 +7,7 @@ class WordCount:
     words seen, sorted alphabetically and by popularity. 
 
     All words are stored in lowercase.
-    Numbers are not included.
     """
-    #_words_seen = defaultdict(int)
-    #_word_counter = 0
 
     def __init__(self):
         self._words_seen = defaultdict(int)
@@ -59,6 +56,18 @@ class WordCount:
             self._words_seen[word] += 1
             self._word_counter += 1
 
+    def _words_list_sort(self):
+        """
+        This function returns a defaultdict(list) of the words seen, 
+        grouped by their respective number of appearences.
+        """
+        rank_dict = defaultdict(list)
+        # for all the words we have seen, add to new dict w/ count as key
+        for word, count in self._words_seen.items():
+            rank_dict[count] += [word]
+        return rank_dict
+
+    # Functions for public use
 
     def count_file(self, filename):
         """
@@ -86,12 +95,21 @@ class WordCount:
         """
         return sorted(self._words_seen.keys())
 
-    def words_list_rank(self):
+    def words_ranked(self):
         """
-        This function returns a list of lists of the words seen, 
-        sorted by their respective number of appearences.
+        This function returns a list of tuples, where each tuple contains
+        (frequency, [list of words]).
         """
-        return
+        # get our dictionary of words organized by rank
+        rank_dict = self._words_list_sort()
+        # get the keys, sorted in decending order
+        counts = sorted(rank_dict.keys(), reverse = True)
+        # return a list of tuples (count, list of words)
+        return [ (c, rank_dict[c]) for c in counts]
+
+
+
+
 
 
 

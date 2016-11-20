@@ -160,6 +160,21 @@ def all_test_alpha_words():
     assert test_alpha_words('wordswithpunct.txt') == alpha_list
     assert test_alpha_words('wordswithnewlines.txt') == alpha_list
 
+def test_ranked_words(filename):
+    wc = WordCount()
+    wc.count_file(filename)
+    return wc.words_ranked()
+
+def all_test_ranked_words():
+    print "Testing proper return of all words and frequencies ranked."
+    alpha_list = [(4, ['four']), (3, ['three']), (2, ['two']), (1, ['one'])]
+    assert test_ranked_words('blank.txt') == []
+    assert test_ranked_words('words.txt') == alpha_list
+    assert test_ranked_words('wordswithcaps.txt') == alpha_list
+    assert test_ranked_words('wordswithpunct.txt') == alpha_list
+    assert test_ranked_words('wordswithnewlines.txt') == alpha_list   
+
+
 def run_tests():
     # Test file to list of words
     #all_test_file_to_words()
@@ -184,6 +199,9 @@ def run_tests():
 
     # Test that words are returned alphabetically in a list
     all_test_alpha_words()
+
+    # Test that words are returned as a list of tuples (freq, words)
+    all_test_ranked_words()
 
 
 
