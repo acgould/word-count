@@ -25,6 +25,7 @@ def all_test_file_to_words():
     print test_file_to_words('wordswithcaps.txt')
     print test_file_to_words('wordswithpunct.txt')
     print test_file_to_words('wordswithnewlines.txt')
+    print test_file_to_words('wordswithdupfreqs.txt')
 
 def test_clean_words(list):
     wc = WordCount()
@@ -162,6 +163,9 @@ def all_test_alpha_words():
     assert test_alpha_words('wordswithcaps.txt') == alpha_list
     assert test_alpha_words('wordswithpunct.txt') == alpha_list
     assert test_alpha_words('wordswithnewlines.txt') == alpha_list
+    alpha_num_list = ['1', '2', '3', '4', 'cuatro', 'dos', 'four', 'one', \
+        'three', 'tres', 'two', 'uno']
+    assert test_alpha_words('wordswithdupfreqs.txt') == alpha_num_list
 
 def test_ranked_words(filename):
     wc = WordCount()
@@ -176,6 +180,10 @@ def all_test_ranked_words():
     assert test_ranked_words('wordswithcaps.txt') == alpha_list
     assert test_ranked_words('wordswithpunct.txt') == alpha_list
     assert test_ranked_words('wordswithnewlines.txt') == alpha_list   
+    alpha_num_list = [(4, ['4', 'cuatro', 'four']), \
+        (3, ['3', 'three', 'tres']), (2, ['2', 'dos', 'two']), \
+        (1, ['1', 'one', 'uno'])]
+    assert test_ranked_words('wordswithdupfreqs.txt') == alpha_num_list
 
 def test_perc_words(filename):
     wc = WordCount()
@@ -191,6 +199,10 @@ def all_test_perc_words():
     assert test_perc_words('wordswithcaps.txt') == alpha_list
     assert test_perc_words('wordswithpunct.txt') == alpha_list
     assert test_perc_words('wordswithnewlines.txt') == alpha_list   
+    alpha_num_list = [(4.0/30, ['4', 'cuatro', 'four']), \
+        (3.0/30, ['3', 'three', 'tres']), (2.0/30, ['2', 'dos', 'two']), \
+        (1.0/30, ['1', 'one', 'uno'])]
+    assert test_perc_words('wordswithdupfreqs.txt') == alpha_num_list
 
 def test_words_stats(filename):
     wc = WordCount()
@@ -208,8 +220,8 @@ def all_test_words_stats():
     assert test_words_stats('wordswithnewlines.txt') == alpha_list   
 
 def run_tests():
-    # Test file to list of words
-    #all_test_file_to_words()
+    # Check file to list of words by printing
+    # all_test_file_to_words()
 
     # Test cleaning of words
     all_test_clean_words()

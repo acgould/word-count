@@ -114,7 +114,7 @@ class WordCount:
         # get the keys, sorted in decending order
         counts = sorted(rank_dict.keys(), reverse = True)
         # return a list of tuples (count, list of words)
-        return [ (c, rank_dict[c]) for c in counts]
+        return [ (c, sorted(rank_dict[c])) for c in counts]
 
     def words_percent(self):
         """
@@ -126,7 +126,7 @@ class WordCount:
         # get the keys, sorted in decending order
         counts = sorted(rank_dict.keys(), reverse = True)
         # return a list of tuples (count, list of words)
-        return [ (self._per(c), rank_dict[c]) for c in counts]
+        return [ (self._per(c), sorted(rank_dict[c])) for c in counts]
 
     def word_stats(self):
         """
@@ -138,7 +138,7 @@ class WordCount:
         # get the keys, sorted in decending order
         counts = sorted(rank_dict.keys(), reverse = True)
         # return a list of tuples (count, list of words)
-        return [ (c, self._per(c), rank_dict[c]) for c in counts]
+        return [ (c, self._per(c), sorted(rank_dict[c])) for c in counts]
 
 
 
