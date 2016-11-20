@@ -92,6 +92,10 @@ class WordCount:
         """This function returns the current total word count. """
         return self._total_words
 
+    def word_count_unique(self):
+        """This function returns the current total of unique words. """
+        return len(self._word_counts.keys())
+
     def word_count(self, word):
         """This function returns the current count for a given word."""
         clean_word = self._word_cleaner(word)

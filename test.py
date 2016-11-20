@@ -149,6 +149,22 @@ def all_test_word_count_total():
     test_word_count_total(list_of_strings(1000))
     test_word_count_total(list_of_strings(1000) + list_of_strings(1000))
 
+def test_word_count_unique(list_of_words):
+    wc = WordCount()
+    for word in list_of_words:
+        wc._add_to_count(word)
+    return wc.word_count_unique()
+
+def all_test_word_count_unique():
+    print "Testing proper return of unique words count."
+    assert test_word_count_unique([]) == 0
+    assert test_word_count_unique(list_of_strings(100)) == 100
+    assert test_word_count_unique(list_of_strings(1000)) == 1000
+    assert test_word_count_unique(list_of_strings(1000) \
+        + list_of_strings(1000)) == 1000
+    assert test_word_count_unique(list_of_strings(100) + list_of_strings(50) \
+        + list_of_strings(25)) == 100
+
 def test_alpha_words(filename):
     wc = WordCount()
     wc.count_file(filename)
@@ -240,6 +256,9 @@ def run_tests():
 
     # Test that total word count is returned correctly
     all_test_word_count_total()
+
+    # Test that unique word count is returned correctly
+    all_test_word_count_unique()
 
     # Test that words are returned alphabetically in a list
     all_test_alpha_words()
