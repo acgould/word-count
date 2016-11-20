@@ -42,4 +42,4 @@ def writers_words(list_of_files, outputfile):
     return True
 
 # uncomment to run on Shakespeare's full works from the Gutenberg project
-writers_words(['shakespeare.txt'], 'shakespearestats.txt')
+# writers_words(['shakespeare.txt'], 'shakespearestats.txt')
