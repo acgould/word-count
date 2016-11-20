@@ -34,7 +34,15 @@ words_ranked() returns a list of tuples, where each tuple is (frequency, [list o
 words_percent() returns a list of tuples, where each tuple contains (frequency percentage of total words, [list of words]).
 
 To get both the absolute frequency (count) and the relative frequency (percentage), use word_stats(). This function returns a list of tuples, where each tuple contains (count, percentage, [list of words]).
-        
+
+## test.py
+This file implements a series of tests to check the functionality of WordCount. It relies on the following text files:
+* blank.txt
+* words.txt
+* wordswithcaps.txt
+* wordswithpunc.txt
+* wordswithnewlines.txt
+* wordswithdupfreqs.txt
 
 ## Shakespeare 
 The complete works of Shakespeare found in shakespeare.txt originated from the Gutenberg Project: 
