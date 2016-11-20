@@ -44,6 +44,9 @@ This file implements a series of tests to check the functionality of WordCount. 
 * wordswithnewlines.txt
 * wordswithdupfreqs.txt
 
+## writerswords.py
+This file implements a function which uses WordCount to count words in a given list of files. It then formats the results and writes them to a given output file. This funciton uses str.rjust() and str.ljust() for the formatting, which depends on a series of constants. The constants in the file currently are adjusted for use with Shakespeare.
+
 ## Shakespeare 
 The complete works of Shakespeare found in shakespeare.txt originated from the Gutenberg Project: 
 https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt
