@@ -1,3 +1,5 @@
+# implementation of the WordCount class
+
 from collections import defaultdict
 
 class WordCount:
@@ -10,13 +12,13 @@ class WordCount:
     """
 
     def __init__(self):
-        self._words_seen = defaultdict(int)
-        self._word_counter = 0     
+        self._word_counts = defaultdict(int)
+        self._total_words = 0     
 
     def reset(self):
         """This function resets the counter and words stored """
-        self._words_seen = defaultdict(int)
-        self._word_counter = 0
+        self._word_counts = defaultdict(int)
+        self._total_words = 0
 
     def _file_reader(self, filename):
         """
@@ -25,7 +27,9 @@ class WordCount:
         """
         try:
             text_file = open(filename, 'r')
-            return text_file.read().split()
+            words = text_file.read().split()
+            text_file.close()
+            return words
 
         except NameError: # in case there is a problem with the file name
             print("No such file " + filename + " found.")
@@ -53,8 +57,8 @@ class WordCount:
     def _add_to_count(self, word):
         """This function increments the overall and dictionary counts."""
         if len(word) > 0:
-            self._words_seen[word] += 1
-            self._word_counter += 1
+            self._word_counts[word] += 1
+            self._total_words += 1
 
     def _words_list_sort(self):
         """
@@ -63,9 +67,14 @@ class WordCount:
         """
         rank_dict = defaultdict(list)
         # for all the words we have seen, add to new dict w/ count as key
-        for word, count in self._words_seen.items():
+        for word, count in self._word_counts.items():
             rank_dict[count] += [word]
         return rank_dict
+
+    def _per(self, count):
+        """ This function returns count/total count"""
+        return float(count)/self._total_words
+
 
     # Functions for public use
 
@@ -81,19 +90,19 @@ class WordCount:
 
     def word_count_total(self):
         """This function returns the current total word count. """
-        return self._word_counter
+        return self._total_words
 
     def word_count(self, word):
         """This function returns the current count for a given word."""
         clean_word = self._word_cleaner(word)
-        return self._words_seen[clean_word]
+        return self._word_counts[clean_word]
 
     def words_alphabetical(self):
         """
         This function returns a list of all the words seen, sorted 
         alphabetically.
         """
-        return sorted(self._words_seen.keys())
+        return sorted(self._word_counts.keys())
 
     def words_ranked(self):
         """
@@ -106,6 +115,30 @@ class WordCount:
         counts = sorted(rank_dict.keys(), reverse = True)
         # return a list of tuples (count, list of words)
         return [ (c, rank_dict[c]) for c in counts]
+
+    def words_percent(self):
+        """
+        This function returns a list of tuples, where each tuple contains
+        (frequency percentage, [list of words]).
+        """
+        # get our dictionary of words organized by rank
+        rank_dict = self._words_list_sort()
+        # get the keys, sorted in decending order
+        counts = sorted(rank_dict.keys(), reverse = True)
+        # return a list of tuples (count, list of words)
+        return [ (self._per(c), rank_dict[c]) for c in counts]
+
+    def word_stats(self):
+        """
+        This function returns a list of tuples, where each tuple contains
+        (count, frequency percentage, [list of words]).
+        """
+        # get our dictionary of words organized by rank
+        rank_dict = self._words_list_sort()
+        # get the keys, sorted in decending order
+        counts = sorted(rank_dict.keys(), reverse = True)
+        # return a list of tuples (count, list of words)
+        return [ (c, self._per(c), rank_dict[c]) for c in counts]
 
 
 
