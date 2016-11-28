@@ -36,7 +36,7 @@ words_percent() returns a list of tuples, where each tuple contains (frequency p
 To get both the absolute frequency (count) and the relative frequency (percentage), use word_stats(). This function returns a list of tuples, where each tuple contains (count, percentage, [list of words]).
 
 ## test.py
-This file implements a series of tests to check the functionality of WordCount. It relies on the following text files:
+This file implements a series of tests to check the functionality of WordCount. It is run using py.test and relies on the following text files:
 * blank.txt
 * words.txt
 * wordswithcaps.txt
